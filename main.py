@@ -13,6 +13,7 @@ except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", 'streamlit'])
     subprocess.check_call([sys.executable, "-m", "pip", "install", 'yfinance'])
     subprocess.check_call([sys.executable, "-m", "pip", "install", 'neuralprophet'])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", 'prophet'])
     subprocess.check_call([sys.executable, "-m", "pip", "install", 'plotly'])
 finally:
     import streamlit as st
@@ -20,6 +21,7 @@ finally:
 
     import yfinance as yf
     from neuralprophet import NeuralProphet
+    from prophet import Prophet
 
     from plotly import graph_objs as go
 
@@ -68,13 +70,28 @@ metrics = m.fit(df_train)
 future = m.make_future_dataframe(df=df_train, periods=period, n_historic_predictions=True)
 forecast = m.predict(df=future)
 
-st.subheader('Forecast data')
-st.write(forecast.tail())
+n = Prophet()
+mnetrics = m.fit(df.train)
+nfuture = m.make_future_dataframe(periods=period)
+nforecast = m.predict(nfuture)
+nforecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']]
 
-st.write('Forecast Data')
+
+st.subheader('Forecast data (NeuralProphet')
+st.write(forecast.tail())
+st.write("Forecast Components (Prophet)")
+st.write(nforecast.tail())
+
+st.write('Forecast Data (NeuralProphet)')
 fig1 = m.plot(forecast)
 st.plotly_chart(fig1, use_container_width=True)
+st.write("Forecast Components (Prophet)")
+nfig1 = n.plot(nforecast)
+st.plotly_chart(nfig1, use_container_widtch=True)
 
-st.write("Forecast Components")
+st.write("Forecast Components (NeuralProphet)")
 fig2 = m.plot_components(forecast)
 st.write(fig2)
+st.write("Forecast Components (Prophet)")
+nfig2 = n.plot_components(nforecast)
+st.write(nfig2)
