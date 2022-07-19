@@ -10,7 +10,10 @@ try:
 
     from plotly import graph_objs as go
 except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", 'streamlit yfinance neuralprophet plotly'])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", 'streamlit'])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", 'yfinance'])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", 'neuralprophet'])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", 'plotly'])
 finally:
     import streamlit as st
     from datetime import date
