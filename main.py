@@ -94,7 +94,7 @@ st.write(forecast.tail())
 
 st.write("Forecast Components (Prophet)")
 fig1 = m.plot(forecast)
-st.plotly_chart(fig1, use_container_widtch=True)
+st.plotly_chart(fig1, use_container_width=True)
 
 
 st.write("Forecast Components (Prophet)")
