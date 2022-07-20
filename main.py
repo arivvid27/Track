@@ -81,7 +81,7 @@ fig2 = m.plot_components(forecast)
 st.write(fig2)
 
 m = Prophet
-metrics = m.fit(df_train)
+m.fit(df_train)
 future = m.make_future_dataframe(periods=period)
 forecast = m.predict(future)
 forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']]
