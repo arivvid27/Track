@@ -71,7 +71,7 @@ future = m.make_future_dataframe(df=df_train, periods=period, n_historic_predict
 forecast = m.predict(df=future)
 
 n = Prophet()
-mnetrics = n.fit(df.train)
+n.fit(df.train)
 nfuture = n.make_future_dataframe(periods=period)
 nforecast = n.predict(nfuture)
 nforecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']]
