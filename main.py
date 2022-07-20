@@ -70,27 +70,33 @@ metrics = m.fit(df_train)
 future = m.make_future_dataframe(df=df_train, periods=period, n_historic_predictions=True)
 forecast = m.predict(df=future)
 
-Prophet.fit(df.train)
-nfuture = Prophet.make_future_dataframe(periods=period)
-nforecast = Prophet.predict(nfuture)
-nforecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']]
-
+st.subheader('Forecast data (NeuralProphet')
+st.write(forecast.tail())
 
 st.subheader('Forecast data (NeuralProphet')
 st.write(forecast.tail())
-st.write("Forecast Components (Prophet)")
-st.write(nforecast.tail())
-
-st.write('Forecast Data (NeuralProphet)')
-fig1 = m.plot(forecast)
-st.plotly_chart(fig1, use_container_width=True)
-st.write("Forecast Components (Prophet)")
-nfig1 = Prophet.plot(nforecast)
-st.plotly_chart(nfig1, use_container_widtch=True)
 
 st.write("Forecast Components (NeuralProphet)")
 fig2 = m.plot_components(forecast)
 st.write(fig2)
+
+m = Prophet
+metrics = m.fit(df.train)
+future = m.make_future_dataframe(periods=period)
+forecast = m.predict(future)
+forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']]
+
+
+
 st.write("Forecast Components (Prophet)")
-nfig2 = Prophet.plot_components(nforecast)
-st.write(nfig2)
+st.write(forecast.tail())
+
+
+st.write("Forecast Components (Prophet)")
+fig1 = m.plot(forecast)
+st.plotly_chart(fig1, use_container_widtch=True)
+
+
+st.write("Forecast Components (Prophet)")
+fig2 = m.plot_components(forecast)
+st.write(fig2)
