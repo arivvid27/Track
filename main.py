@@ -80,7 +80,7 @@ st.write("Forecast Components (NeuralProphet)")
 fig2 = m.plot_components(forecast)
 st.write(fig2)
 
-m = Prophet
+m = Prophet()
 m.fit(df_train)
 future = m.make_future_dataframe(periods=period)
 forecast = m.predict(future)
